@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_19_131152) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_21_170605) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -73,6 +73,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_131152) do
     t.index ["product_id"], name: "index_subscribers_on_product_id"
   end
 
+  create_table "todos", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "status"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -85,4 +95,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_131152) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "sessions", "users"
   add_foreign_key "subscribers", "products"
+  add_foreign_key "todos", "users"
 end
